@@ -11,6 +11,7 @@ import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { FcGoogle } from "react-icons/fc";
 import { Eye, EyeOff } from "lucide-react";
 import Link from "next/link";
+import { signIn } from "next-auth/react";
 
 // Define the validation schema using Yup
 const schema = yup
@@ -42,6 +43,10 @@ export default function LoginForm() {
   };
 
   const togglePasswordVisibility = () => setShowPassword(!showPassword);
+
+  const handleContinueWithGoogle = () => {
+    signIn("google");
+  };
 
   return (
     <Card className="w-full">
@@ -117,10 +122,12 @@ export default function LoginForm() {
               <span className="bg-white px-2 text-gray-500">Or</span>
             </div>
           </div>
+
           <Button
+            type="button"
             variant="outline"
             className="w-full"
-            onClick={() => console.log("Continue with Google")}
+            onClick={() => handleContinueWithGoogle()}
           >
             <FcGoogle className="mr-2 h-4 w-4" />
             Continue with Google
